@@ -2,9 +2,11 @@
 
 **Understand the code you built. Clear the knowledge debt you left behind.**
 
-Repo Archaeology is a shared skill for **Claude Code and Codex**. It helps you explain a repository's purpose, trace a feature across files, understand documented decisions, and check what you can explain independently.
+Repo Archaeology is a shared skill for **Claude Code and Codex**. It is built first for people who direct AI builds and know what they wanted to make, but may not write code or understand how the implementation works. It starts with the purpose, an everyday example, and a small picture of the system, then patiently connects those ideas to the actual files.
 
 Knowledge debt is the gap between code you have built and code you understand. This skill turns that gap into a guided reading route, worked examples, and focused practice.
+
+If you already write code, tell the agent what you know and ask it to move faster. Beginner explanations are the starting point, and the pace adapts to you.
 
 It is an instruction-based skill. There is no server, custom installer, or package dependency to run. You need Git and an existing Claude Code or Codex installation with access to the repository you want to study.
 
@@ -64,16 +66,44 @@ Enter these prompts **inside the agent's chat, not in your terminal**.
 Claude Code:
 
 ```text
-/repo-archaeology study this repository. I built it with AI and want to understand how it works. Start with the main user journey and explain unfamiliar terms.
+/repo-archaeology teach me this repository. I directed the build with AI, but I don't write code. Start with what it does, draw a simple map, and walk me through one example slowly. Explain technical words as we reach them.
 ```
 
 Codex CLI or IDE:
 
 ```text
-$repo-archaeology study this repository. I built it with AI and want to understand how it works. Start with the main user journey and explain unfamiliar terms.
+$repo-archaeology teach me this repository. I directed the build with AI, but I don't write code. Start with what it does, draw a simple map, and walk me through one example slowly. Explain technical words as we reach them.
 ```
 
 In a desktop skill picker, select `repo-archaeology` and send the same request without the command prefix. You can also provide a local repository path or a GitHub URL the agent can access.
+
+### Your first few minutes
+
+In a beginner lesson, expect the agent to:
+
+1. Explain what the project is for in ordinary language.
+2. Connect it to a familiar story, while saying where the comparison stops fitting.
+3. Draw a small map from the inspected code, with plain labels and the corresponding filenames.
+4. Follow one concrete example through the parts, explaining why each step leads to the next.
+5. Invite a low-pressure prediction when you are ready, with a hint or another explanation available.
+
+This is a starting experience, not a timer. You can say "slow down", "explain that another way", or "I know this part". The agent should also notice skipped connections itself. A brief orientation is followed by a complete explanation; important steps should not disappear for the sake of a short answer.
+
+### Choose how to begin
+
+If you prefer to agree the scope before any repository reading, say:
+
+```text
+Let's agree the scope first. Ask which parts I want to understand and how much detail I want. Propose a reading plan, then wait for me to approve it before reading the repository.
+```
+
+If you want to start immediately, say "start teaching me now". The agent honors your stated preference and asks only for essential missing information, such as which project you mean.
+
+If you already develop software, you can accelerate:
+
+```text
+I write Python and understand functions and tests. Skip those definitions. Focus on how the modules connect and why the main design choices were made. Keep the full explanation of those connections.
+```
 
 ### Choose how to learn
 
@@ -82,8 +112,8 @@ The words below describe learning modes, not terminal commands or a separate com
 | Mode | What it does | Example request after the skill name |
 | --- | --- | --- |
 | `study` | Default: builds a guided study sheet with a reading route, a real flow, evidence, and practice. | `study this repo; explain the checkout flow first` |
-| `teach` | Teaches one concept at a time and waits for your response. | `teach me how a request becomes a database change` |
-| `check` | Uses questions and teach-back to find gaps in your understanding. | `check whether I understand the authentication flow; ask one question at a time` |
+| `teach` | Teaches one concept at a time, explains unfamiliar terms, and waits at each question. | `teach me what happens after someone presses Save` |
+| `check` | Uses supportive questions and teach-back: explaining an idea in your own words. | `help me check whether I understand how signing in works; ask one question at a time` |
 | `refresh` | Uses a previous sheet and its recorded commit to explain what changed and what needs relearning. | `refresh using /path/to/my-study-sheet.md and its recorded commit` |
 
 Tell the agent what you already know, what feels unclear, and how much detail you want. For example:
@@ -101,13 +131,16 @@ The default is targeted reading of the important paths. An exhaustive request ex
 ## What you get
 
 - A plain-language explanation of the problem the project solves.
+- A simple system map drawn from the inspected code, without sending source to an outside diagram service.
 - A reading route: which files to read, what to notice, and what question each file answers.
 - A worked journey through the actual files and functions, with small code excerpts when useful.
 - Source pointers and a distinction between documented intent, implementation, reported results, and inference.
-- Questions that ask you to explain a decision or predict the effect of a change.
+- Optional practice that invites you to explain a decision or guess what a small change would do, with hints and patient feedback.
 - A clear account of limitations, unread areas, and missing explanations.
 
 The format adapts to the project. Research results and statistics belong in research repositories; app behavior, interfaces, and failure paths matter in application repositories. See the [study-sheet guide](references/study-sheet.md) and the [illustrative sample session](examples/sample-session.md).
+
+The evidence rules support the lesson: explanations remain readable, and source pointers let you inspect their basis when useful. A mistaken guess helps the agent decide what to explain next. You can ask for the answer, skip practice, or request a study sheet without taking a quiz.
 
 ### Save progress when you want it
 
@@ -161,3 +194,9 @@ To uninstall, delete the `repo-archaeology` folder from the appropriate skills d
 ## Contributing
 
 Useful contributions improve an observed learning failure: a confusing explanation, an unsupported claim, a missing connection between files, or an installation problem. Include the prompt, expected behavior, and a small non-sensitive example. Keep the shared skill portable and avoid adding mandatory steps for cases that only some repositories need.
+
+### Evaluate with a real learner
+
+The sample session is invented; it does not establish that this skill works for a complete beginner. A real session on the learner's own project would be a useful next evaluation when they request it. Pick one feature and record the learner's actual questions, unfamiliar terms, requests for another explanation, and whether the map helped. Finish with an optional explanation in the learner's own words and a small change prediction.
+
+Use those observations to improve the lesson. Do not fill gaps with invented learner answers or count an agent-written explanation as demonstrated understanding. Save or publish an actual transcript only when the learner has agreed to that use.

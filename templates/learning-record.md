@@ -8,6 +8,9 @@ Create or update this record only when the learner requests it. Save outside the
 - Branch / commit / relevant local changes:
 - Session date:
 - Learner's goal and selected feature:
+- Stated familiarity (use the beginner default if unknown; do not invent a profile):
+- Start preference, if given: scope first / begin now:
+- Preferred pace, depth, analogy world, or explanation-only preference, if given:
 - Prior record or baseline, if any:
 - Read closely / skimmed / excluded / unavailable:
 
@@ -17,6 +20,18 @@ Use **explained**, **demonstrated**, **unclear**, or **not assessed**. A demonst
 
 | Concept | Why it matters | State | Evidence from learner's answer | Source and revision | Next exercise |
 | --- | --- | --- | --- | --- | --- |
+
+## Teaching continuity
+
+Record only what happened in the real session. Leave an observation unrecorded when there is no evidence; do not invent learner reactions.
+
+- Essential terms introduced and the examples used to explain them:
+- Terms or connections that needed another explanation:
+- Picture or example the learner said helped, if any:
+- Places the learner asked to slow down, go deeper, or skip ahead:
+- Changes to the explanation in response:
+
+Keep these notes useful for resuming a lesson, rather than turning them into a score. An agent simulation or invented sample is not evidence of a real learner's understanding.
 
 ## Evidence ledger
 
