@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repo Archaeology"
+  short_description: "Understand your repo and clear knowledge debt"
+  default_prompt: "Use $repo-archaeology to teach me this repository and check what I understand."
